@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Portfolio Template · Minimal Bento Style</title>
+  <meta name="description" content="A clean, minimal portfolio template with bento grid layout and 3D elements">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'] },
+        }
+      }
+    };
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-50">
+  <!-- Progress bar -->
+  <div id="progress"></div>
+  <a href="#main" class="sr-only focus:not-sr-only">Skip to content</a>
+
+  <!-- Navigation -->
+  <nav class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/60 dark:bg-neutral-950/50 border-b border-neutral-200/60 dark:border-neutral-800/60">
+    <div class="max-w-6xl mx-auto px-4 py-3 grid grid-cols-3 items-center">
+      <div class="flex items-center gap-3">
+        <span class="text-lg font-semibold tracking-tight"><span class="opacity-60">@</span><span class="ml-1">YourName</span></span>
+      </div>
+      <div class="nav-center flex justify-center gap-8">
+        <a href="#work" class="text-sm hover:opacity-80">Work</a>
+        <a href="#about" class="text-sm hover:opacity-80">About</a>
+        <a href="#blog" class="text-sm hover:opacity-80">Blog</a>
+        <a href="#contact" class="text-sm hover:opacity-80">Contact</a>
+      </div>
+      <div class="flex justify-end items-center gap-3">
+        <button id="theme-toggle" class="text-sm px-3 py-1.5 rounded-xl border border-neutral-200 dark:border-neutral-800">Toggle dark</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="relative overflow-hidden min-h-[86vh] flex items-center">
+    <div class="absolute inset-0 -z-20 bg-gradient-to-b from-white to-neutral-50 dark:from-neutral-950 dark:to-neutral-900"></div>
+    <div class="max-w-6xl mx-auto px-4 pt-28 pb-16 w-full grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3">
+        <h1 class="fluid-title font-semibold tracking-tight leading-tight reveal">
+          <span id="typewriter" aria-label="Your Name | Creative Title"></span>
+        </h1>
+        <p class="fluid-sub mt-4 max-w-2xl text-neutral-700 dark:text-neutral-300 reveal">
+          Hello — I'm a <span class="font-medium">creative professional</span>. 
+          I design elegant solutions with modern web technologies and a minimalist approach.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3 reveal">
+          <a href="#work" class="px-5 py-2.5 rounded-2xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:opacity-90">View Work</a>
+          <a href="#contact" class="px-5 py-2.5 rounded-2xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900">Contact</a>
+        </div>
+      </div>
+
+      <!-- 3D Canvas -->
+      <div class="md:col-span-2 h-[42vh] md:h-[52vh] relative reveal">
+        <div class="canvas-wrap">
+          <canvas id="hero-canvas" class="w-full h-full block"></canvas>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Work Section -->
+    <section id="work" class="relative py-20">
+      <div class="max-w-6xl mx-auto px-4">
+        <div class="mb-8 reveal">
+          <p class="text-[11px] uppercase tracking-[0.18em] text-neutral-500 dark:text-neutral-400">Selected work</p>
+          <h2 class="text-3xl font-semibold tracking-tight mt-2">Projects</h2>
+          <p class="mt-2 text-neutral-600 dark:text-neutral-400">Auto-populated from <a class="link" href="#" target="_blank" rel="noreferrer">GitHub</a></p>
+        </div>
+        <div id="grid" class="bento auto-rows-[minmax(120px,auto)]">
+          <!-- Sample project cards (will be populated by JS) -->
+          <article class="bento-item span-8 row-2 reveal hover:shadow-lg transition-transform will-change-transform hover:scale-[1.01]">
+            <div class="flex items-start justify-between gap-3">
+              <h3 class="text-lg font-semibold tracking-tight"><a class="link" href="#" target="_blank" rel="noreferrer">Sample Project 1</a></h3>
+              <a class="text-sm link opacity-70" href="#" target="_blank" rel="noreferrer">Open</a>
+            </div>
+            <p class="mt-2 text-sm text-neutral-600 dark:text-neutral-400">A showcase project demonstrating modern web techniques.</p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span class="text-xs px-2 py-1 rounded-full bg-neutral-100 dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800">JavaScript</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 border-t border-neutral-200/70 dark:border-neutral-800/70">
+      <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-5 gap-10 items-start">
+        <div class="md:col-span-3 reveal">
+          <h3 class="text-2xl font-semibold tracking-tight mb-3">About Me</h3>
+          <p class="text-neutral-700 dark:text-neutral-300">
+            I specialize in creating responsive, accessible web experiences with clean code. 
+            My toolkit includes modern JavaScript, CSS frameworks, and creative coding libraries.
+          </p>
+        </div>
+        <ul class="md:col-span-2 space-y-2 text-sm text-neutral-700 dark:text-neutral-300 reveal">
+          <li><span class="font-medium">Location:</span> City, Country</li>
+          <li><span class="font-medium">Email:</span> <a class="link" href="mailto:you@example.com">your@email.com</a></li>
+          <li><span class="font-medium">GitHub:</span> <a class="link" href="https://github.com/yourusername">@yourusername</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20">
+      <div class="max-w-6xl mx-auto px-4 reveal">
+        <h3 class="text-2xl font-semibold tracking-tight">Blog</h3>
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">Coming soon with articles about web development and design.</p>
+        <a class="mt-4 inline-block px-5 py-2.5 rounded-2xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900" href="#" target="_blank" rel="noreferrer">View Blog</a>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+      <div class="max-w-6xl mx-auto px-4 reveal">
+        <h3 class="text-2xl font-semibold tracking-tight">Get in Touch</h3>
+        <p class="mt-2 text-neutral-600 dark:text-neutral-400">Available for freelance work and collaborations.</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a href="mailto:you@example.com" class="px-5 py-2.5 rounded-2xl bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 hover:opacity-90">Email Me</a>
+          <a href="#work" class="px-5 py-2.5 rounded-2xl border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900">View Projects</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-neutral-200/70 dark:border-neutral-800/70 py-10">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <p class="text-sm text-neutral-500">© <span id="year"></span> Your Name. All rights reserved.</p>
+      <div class="flex items-center gap-4">
+        <a class="opacity-80 hover:opacity-100" href="#" aria-label="GitHub" target="_blank" rel="noreferrer">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.3-1.8-1.3-1.8-1.1-.8.1-.8.1-.8 1.2.1 1.9 1.3 1.9 1.3 1.1 1.9 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.6-.3-5.4-1.3-5.4-6 0-1.3.5-2.4 1.3-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.6 11.6 0 0 1 6 0C17.7 3.2 18.7 3.5 18.7 3.5c.6 1.7.2 2.9.1 3.2.8.9 1.3 1.9 1.3 3.2 0 4.7-2.8 5.7-5.4 6 .4.3.8 1 .8 2v2.6c0 .3.2.6.8.5A12 12 0 0 0 12 .5z" />
+          </svg>
+        </a>
+        <!-- Additional social icons -->
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="js/main.js" defer></script>
+  <script src="js/threejs.js" type="module" defer></script>
+</body>
+</html>
